@@ -17,8 +17,8 @@ export const getVersesInChapter = async chapterNumber => {
     console.log(
       `------------- verses in chapter ${chapterNumber} -------------`,
     );
-    console.log(data);
-    return data;
+    console.log(data.data);
+    return data.data;
   } catch (error) {
     throw error;
   }

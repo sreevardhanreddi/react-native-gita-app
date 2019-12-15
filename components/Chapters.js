@@ -9,6 +9,7 @@ import {
   StatusBar,
   FlatList,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import ChapterItem from './ChapterItem';
 const Chapters = chapters => {
@@ -22,17 +23,18 @@ const Chapters = chapters => {
       {/* <Text>{JSON.stringify(props)}</Text> */}
       <FlatList
         data={props}
-        keyExtractor={(item, index) => (item.chapter_number + index).toString()}
+        keyExtractor={(item, index) => item.chapter_number.toString()}
         renderItem={({item, index, separators}) => (
-          <TouchableHighlight
-            onPress={() => onPress(item)}
-            onShowUnderlay={separators.highlight}
-            onHideUnderlay={separators.unhighlight}>
-            {/* <View style={{backgroundColor: 'white'}}>
-              <Text>{item.name}</Text>
-            </View> */}
-            <ChapterItem chapter={item} />
-          </TouchableHighlight>
+          //   <TouchableOpacity
+          //     onPress={() => onPress(item)}
+          //     // onShowUnderlay={separators.highlight}
+          //     // onHideUnderlay={separators.unhighlight}
+          //   >
+          //     {/* <View style={{backgroundColor: 'white'}}>
+          //       <Text>{item.name}</Text>
+          //     </View> */}
+          //   </TouchableOpacity>
+          <ChapterItem chapter={item} />
         )}
       />
     </View>

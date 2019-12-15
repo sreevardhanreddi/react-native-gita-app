@@ -11,17 +11,9 @@ import {
 import MainApp from './screens/MainScreen';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-const App = ({navigation}) => {
-  // const title = 'Bhagavat Gita';
+import VersesScreen from './screens/VersesScreen';
 
-  // App.navigation = () => ({
-  //   title,
-  // });
-
-  // useEffect(() => {
-  //   navigation.setParams({title});
-  // }, []);
-
+const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -45,6 +37,9 @@ App.navigationOptions = ({navigation}) => {
 const AppNavigator = createStackNavigator({
   Home: {
     screen: App,
+  },
+  Verses: {
+    screen: VersesScreen,
   },
 });
 
