@@ -3,5 +3,7 @@
 * Built using https://bhagavadgita.io/api/ api.
 * Build using react hooks and axios.
 
-![Chapters](./screenshots/chapters.png)
-![Verses](./screenshots/verses.png)
+
+| chapters | verses |
+|---|---|
+| ![Chapters](./screenshots/chapters.png)  | ![Verses](./screenshots/verses.png) |
