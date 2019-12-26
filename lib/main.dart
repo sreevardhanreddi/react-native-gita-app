@@ -58,7 +58,7 @@ class _ScaffoldContainerState extends State<ScaffoldContainer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gita App'),
+        title: Text('Gita'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.more_vert),

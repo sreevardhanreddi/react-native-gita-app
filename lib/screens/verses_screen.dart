@@ -13,7 +13,7 @@ class VerseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Title'),
+        title: Text('Gita'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.more_vert),
