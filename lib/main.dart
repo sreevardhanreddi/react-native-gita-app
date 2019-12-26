@@ -4,25 +4,74 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gita_app/db_helpers/db_class.dart';
 import 'package:gita_app/models/chapters_model.dart';
+import 'package:gita_app/provider/app_provider.dart';
+import 'package:gita_app/screens/verses_screen.dart';
+import 'package:gita_app/widgets/bottom_sheet_options.dart';
 import 'package:gita_app/widgets/chapter_card.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart' as sql;
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Gita App'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AppProvider(),
         ),
-        body: GitaApp(),
+      ],
+      child: Consumer<AppProvider>(
+        builder: (context, appProvider, _) {
+          return MaterialApp(
+            home: ScaffoldContainer(),
+            theme: appProvider.selectedTheme,
+            routes: <String, WidgetBuilder>{
+              VerseScreen.routeName: (context) => VerseScreen(),
+            },
+          );
+        },
       ),
-      theme: ThemeData.dark(),
+    );
+  }
+}
+
+class ScaffoldContainer extends StatefulWidget {
+  const ScaffoldContainer({Key key}) : super(key: key);
+
+  @override
+  _ScaffoldContainerState createState() => _ScaffoldContainerState();
+}
+
+class _ScaffoldContainerState extends State<ScaffoldContainer> {
+  @override
+  void didChangeDependencies() async {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    await appProvider.setAppDataFromStorage();
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Gita App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => BottomSheetOptions(),
+              );
+            },
+          ),
+        ],
+      ),
+      body: GitaApp(),
     );
   }
 }
@@ -59,7 +108,6 @@ class _GitaAppState extends State<GitaApp> {
       chapters = chapters;
       _isLoading = false;
     });
-
     super.didChangeDependencies();
   }
 
